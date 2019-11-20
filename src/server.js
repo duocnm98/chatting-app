@@ -1,13 +1,27 @@
 import express from 'express';
 import ConnectDB from './config/connectDB';
-import ContactModel from './models/contact.model';
+import configViewEngine from './config/viewEngine';
+
 require('dotenv').config();
 
+//Initiate application
 let app = express();
 
-
-// Connect to MongoDB
+// Connect to MongoDB 
 ConnectDB();
+
+//Config view engine
+configViewEngine(app);
+
+app.get("/", (req, res) => {
+  return res.render("main/master");
+});
+
+app.get("/login-register", (req, res) => {
+  return res.render("auth/loginRegister");
+});
+
+
 
 app.get('/test-database', async (req, res) => {
   try{
@@ -22,6 +36,7 @@ app.get('/test-database', async (req, res) => {
     console.log(err);
   }
   res.send("<h1>Hello world</h1>");
+  
 });
 
 app.listen(process.env.APP_PORT, () => {
