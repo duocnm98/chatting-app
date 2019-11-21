@@ -1,10 +1,7 @@
 module.exports.index = (req, res) => {
-  return res.render("main/master");
+  return res.render("main/home/home");
 }
 
-module.exports.loginRegister = (req, res) => {
-  return res.render("auth/loginRegister");
-}
 
 module.exports.testDatabase =  async (req, res) => {
   try{
