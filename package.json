@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/server.js"
+    "start": "babel-node  src/server.js",
+    "start1": "nodemon --inspect src/server.js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -18,16 +19,25 @@
   },
   "homepage": "https://github.com/kiviengdpt/chatting-app#readme",
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "bluebird": "^3.5.5",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
     "dotenv": "^8.0.0",
     "ejs": "^2.5.7",
     "express": "^4.17.1",
     "express-ejs-extend": "0.0.1",
-    "mongoose": "^4.13.9"
+    "express-session": "^1.15.6",
+    "express-validator": "^4.3.0",
+    "mongoose": "^4.13.9",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "nodemon": "^1.19.4"
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^2.0.1"
   }
 }
