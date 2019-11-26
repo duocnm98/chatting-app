@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { verify } from "crypto";
+import bcrypt from 'bcrypt';
 
 const Schema = mongoose.Schema;
 
@@ -41,6 +41,10 @@ UserSchema.statics = {
     return this.findOne({ "local.email": email }).exec();
   },
 
+  findUserById(id) {
+    return this.findById(id).exec();
+  },
+
   removeById(id) {
     return this.findByIdAndRemove(id).exec();
   },
@@ -54,6 +58,12 @@ UserSchema.statics = {
       { "local.verifyToken": token },
       { "local.isActive": true, "local.verifyToken": null }
     ).exec();
+  }
+};
+
+UserSchema.methods = {
+  comparePassword(password) {
+    return bcrypt.compare(password, this.local.password); // return a promise has result is true of false
   }
 };
 
