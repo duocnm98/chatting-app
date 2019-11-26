@@ -11,4 +11,6 @@ router.get('/test-database', home.testDatabase);
 
 router.post('/register', authValid.register, auth.postRegister);
 
+router.get('/verify/:token', auth.verifyAccount);
+
 module.exports = router;

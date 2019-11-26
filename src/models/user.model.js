@@ -1,10 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import { verify } from "crypto";
 
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
   username: String,
-  gender: { type: String, default: 'male' },
+  gender: { type: String, default: "male" },
   phone: { type: Number, default: null },
   address: { type: String, default: null },
   avatar: { type: String, default: "avatar-default.jpg" },
@@ -35,10 +36,25 @@ UserSchema.statics = {
     // "create" is default function of mongoose
     return this.create(item);
   },
-  
-  findByEmail(email){
-    return this.findOne({"local.email": email}).exec();
-  }
-}
 
-module.exports = mongoose.model('user', UserSchema);
+  findByEmail(email) {
+    return this.findOne({ "local.email": email }).exec();
+  },
+
+  removeById(id) {
+    return this.findByIdAndRemove(id).exec();
+  },
+
+  findByToken(token){
+    return this.findOne({ "local.verifyToken": token}).exec();
+  },
+
+  verify(token) {
+    return this.findOneAndUpdate(
+      { "local.verifyToken": token },
+      { "local.isActive": true, "local.verifyToken": null }
+    ).exec();
+  }
+};
+
+module.exports = mongoose.model("user", UserSchema);

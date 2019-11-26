@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node  src/server.js",
-    "start1": "nodemon --inspect src/server.js --exec babel-node"
+    "start1": "babel-node  src/server.js",
+    "start": "nodemon --inspect=8001 src/server.js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "express-session": "^1.15.6",
     "express-validator": "^4.3.0",
     "mongoose": "^4.13.9",
+    "nodemailer": "^4.4.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
