@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 const Schema = mongoose.Schema;
 
@@ -45,12 +45,16 @@ UserSchema.statics = {
     return this.findById(id).exec();
   },
 
+  findByFacebookUid(uid) {
+    return this.findOne({ "facebook.uid": uid }).exec();
+  },
+
   removeById(id) {
     return this.findByIdAndRemove(id).exec();
   },
 
-  findByToken(token){
-    return this.findOne({ "local.verifyToken": token}).exec();
+  findByToken(token) {
+    return this.findOne({ "local.verifyToken": token }).exec();
   },
 
   verify(token) {
