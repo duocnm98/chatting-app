@@ -6,72 +6,73 @@ import bodyParser from 'body-parser';
 import connectFlash from 'connect-flash';
 import configSession from './config/session';
 import passport from 'passport';
-import pem from 'pem';
-import https from 'https';
 
-require('dotenv').config();
+//Initiate application
+let app = express();
 
-pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
-  if (err) {
-    throw err
-  }
+// Connect to MongoDB 
+ConnectDB();
 
-  //Initiate application
-  let app = express();
+//Config session 
+configSession(app);
 
-  // Connect to MongoDB 
-  ConnectDB();
+//Config view engine
+configViewEngine(app);
 
-  //Config session 
-  configSession(app);
+//Enable post data for request
+app.use(bodyParser.urlencoded({extended: true}));
 
-  //Config view engine
-  configViewEngine(app);
+//Enable flash
+app.use(connectFlash());
 
-  //Enable post data for request
-  app.use(bodyParser.urlencoded({extended: true}));
+//Config passportJS
+app.use(passport.initialize());
+app.use(passport.session());
 
-  //Enable flash
-  app.use(connectFlash());
+//Router
+app.use('/', webRoute);
 
-  //Config passportJS
-  app.use(passport.initialize());
-  app.use(passport.session());
-
-  //Router
-  app.use('/', webRoute);
-
-  https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app).listen(process.env.APP_PORT, () => {
-    console.log(`hello friend! I'm runing at : ${process.env.APP_PORT}`);
-  });
+app.listen(process.env.APP_PORT, () => {
+  console.log(`hello friend! I'm runing at : ${process.env.APP_PORT}`);
 });
 
-// //Initiate application
-// let app = express();
 
-// // Connect to MongoDB 
-// ConnectDB();
+// import pem from 'pem';
+// import https from 'https';
 
-// //Config session 
-// configSession(app);
+// require('dotenv').config();
 
-// //Config view engine
-// configViewEngine(app);
+// pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
+//   if (err) {
+//     throw err
+//   }
 
-// //Enable post data for request
-// app.use(bodyParser.urlencoded({extended: true}));
+//   //Initiate application
+//   let app = express();
 
-// //Enable flash
-// app.use(connectFlash());
+//   // Connect to MongoDB 
+//   ConnectDB();
 
-// //Config passportJS
-// app.use(passport.initialize());
-// app.use(passport.session());
+//   //Config session 
+//   configSession(app);
 
-// //Router
-// app.use('/', webRoute);
+//   //Config view engine
+//   configViewEngine(app);
 
-// app.listen(process.env.APP_PORT, () => {
-//   console.log(`hello friend! I'm runing at : ${process.env.APP_PORT}`);
+//   //Enable post data for request
+//   app.use(bodyParser.urlencoded({extended: true}));
+
+//   //Enable flash
+//   app.use(connectFlash());
+
+//   //Config passportJS
+//   app.use(passport.initialize());
+//   app.use(passport.session());
+
+//   //Router
+//   app.use('/', webRoute);
+
+//   https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app).listen(process.env.APP_PORT, () => {
+//     console.log(`hello friend! I'm runing at : ${process.env.APP_PORT}`);
+//   });
 // });
-  
