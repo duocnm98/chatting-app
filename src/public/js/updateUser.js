@@ -2,7 +2,7 @@ let userAvatar = null;
 let userInfo = {};
 let originAvatarSrc = null;
 
-function updateUserInfo () {
+function updateUserInfo() {
   $("#input-change-avatar").bind("change", function() {
     let fileData = $(this).prop("files")[0];
     let math = ["image/png", "image/jpg", "image/jpeg"];
@@ -20,19 +20,19 @@ function updateUserInfo () {
       return false;
     }
 
-    if (typeof (FileReader) != "undefined") {
+    if (typeof FileReader != "undefined") {
       let imagePreview = $("#image-edit-profile");
       imagePreview.empty();
 
       let fileReader = new FileReader();
       fileReader.onload = function(element) {
         $("<img>", {
-          "src": element.target.result,
-          "class": "avatar img-circle",
-          "id": "user-modal-avatar",
-          "alt": "avatar"
+          src: element.target.result,
+          class: "avatar img-circle",
+          id: "user-modal-avatar",
+          alt: "avatar"
         }).appendTo(imagePreview);
-      }
+      };
       imagePreview.show();
       fileReader.readAsDataURL(fileData);
 
@@ -41,9 +41,12 @@ function updateUserInfo () {
 
       userAvatar = formData;
     } else {
-      alertify.notify("Trình duyệt của bạn không hỗ trợ File Reader!", "error", 7);
+      alertify.notify(
+        "Trình duyệt của bạn không hỗ trợ File Reader!",
+        "error",
+        7
+      );
     }
-
   });
 
   $("#input-change-username").bind("change", function() {
@@ -65,7 +68,7 @@ function updateUserInfo () {
   $("#input-change-phone").bind("change", function() {
     userInfo.phone = $(this).val();
   });
-};
+}
 
 $(document).ready(function() {
   updateUserInfo();
@@ -80,25 +83,45 @@ $(document).ready(function() {
     $.ajax({
       url: "/user/update-avatar",
       type: "put",
-      catch: false,
+      cache: false,
       contentType: false,
       processData: false,
       data: userAvatar,
       success: function(result) {
-        //
+        console.log(result);
+        //Display success
+        $(".user-modal-alert-success")
+          .find("span")
+          .text(result.message);
+        $(".user-modal-alert-success").css("display", "block");
+
+        //update navbar user avatar
+        $("#navbar-avatar").attr("src", result.imgSrc);
+
+        //Update avatar orgin source
+        originAvatarSrc = result.imgSrc;
+
+        //Reset all
+        $("#input-btn-cancel-update-user").click();
       },
       error: function(error) {
-        //
+        //Display error
+        console.log(error);
+        $(".user-modal-alert-error")
+          .find("span")
+          .text(error.responseText);
+        $(".user-modal-alert-error").css("display", "block");
+
+        //Reset all
+        $("#input-btn-cancel-update-user").click();
       }
     });
-    // console.log(userAvatar);
-    // console.log(userInfo);
   });
 
   $("#input-btn-cancel-update-user").bind("click", function() {
     userAvatar = null;
     userInfo = {};
+    $("#input-change-avatar").val(null);
     $("#user-modal-avatar").attr("src", originAvatarSrc);
   });
-
-}); 
+});

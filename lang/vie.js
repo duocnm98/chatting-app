@@ -11,7 +11,9 @@ export const transErrors = {
   account_not_actived: "Tài khoản chưa kích hoạt! Vui lòng kiếm tra trong Email đăng kí",
   token_undefinded: "Token không tồn tại",
   login_failed: "Sai tài khoản hoặc mật khẩu",
-  server_error: "Server bị lỗi, vui lòng thử lại sau !!"
+  server_error: "Server bị lỗi, vui lòng thử lại sau !!",
+  avatar_type: "Kiểu file ảnh không hợp lệ. Vui lòng chọn ảnh .PNG hoặc .JPG",
+  avatar_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !"
 };
 
 export const transSuccess = {
@@ -22,7 +24,8 @@ export const transSuccess = {
   loginSuccess: (username) => {
     return `Xin chào ${username}, chúc bạn sử dụng Duoc_messenger vui vẻ!`;
   },
-  logout_success: 'Đăng xuất tài khoản thành công'
+  logout_success: 'Đăng xuất tài khoản thành công',
+  avatar_update: "Cập nhật ảnh đại diện thành công"
 };
 
 export const transMailer = {
