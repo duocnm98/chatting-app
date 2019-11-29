@@ -1,5 +1,5 @@
 import express from "express";
-import { home, auth } from "./../controllers/controller";
+import { home, auth, user } from "./../controllers/controller";
 import { authValid } from "../validation/validation";
 import passport from 'passport';
 import initPassportLocal from './../controllers/passportController/local';
@@ -45,5 +45,8 @@ router.get("/auth/google/callback", auth.checkLoggedOut, passport.authenticate("
 
 router.get("/", auth.checkLoggedIn ,home.index);
 router.get('/logout',auth.checkLoggedIn, auth.getLogout);
+
+//
+router.put("/user/update-avatar", auth.checkLoggedIn, user.updateAvatar);
 
 module.exports = router;
