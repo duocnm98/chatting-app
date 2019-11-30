@@ -2,7 +2,10 @@ export const transValidation = {
   email_incorrect: "Email phải có dạng example@example.example",
   gender_incorrect: "what dờ heo",
   password_incorrect: "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và kí tự đặc biệt",
-  passwordConfirm_incorrect: "Mật khẩu không khớp, vui lòng nhập lại"
+  passwordConfirm_incorrect: "Mật khẩu không khớp, vui lòng nhập lại",
+  update_username: "Username giới hạn trong khoảng 3-17 kí tự, không chứa kí tự đặc biệt",
+  update_address: "Địa chỉ giới hạn trong khoảng 10-30 kí tự",
+  update_phone: "Số điện thoại bắt đầu bằng 0, có 10 chữ số !!"
 };
 
 export const transErrors = {
@@ -13,7 +16,8 @@ export const transErrors = {
   login_failed: "Sai tài khoản hoặc mật khẩu",
   server_error: "Server bị lỗi, vui lòng thử lại sau !!",
   avatar_type: "Kiểu file ảnh không hợp lệ. Vui lòng chọn ảnh .PNG hoặc .JPG",
-  avatar_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !"
+  avatar_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !",
+
 };
 
 export const transSuccess = {
@@ -25,7 +29,8 @@ export const transSuccess = {
     return `Xin chào ${username}, chúc bạn sử dụng Duoc_messenger vui vẻ!`;
   },
   logout_success: 'Đăng xuất tài khoản thành công',
-  avatar_update: "Cập nhật ảnh đại diện thành công"
+  // avatar_update: "Cập nhật ảnh đại diện thành công",
+  userInfo_update: "Cập nhật thông tin người dùng thành công"
 };
 
 export const transMailer = {
