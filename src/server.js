@@ -7,6 +7,7 @@ import connectFlash from 'connect-flash';
 import configSession from './config/session';
 import passport from 'passport';
 
+require('dotenv').config();
 //Initiate application
 let app = express();
 

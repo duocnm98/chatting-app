@@ -19,4 +19,4 @@ let NotificationSchema = new Schema({
   createAt: {type: Number, default: Date.now}
 });
 
-module.exports = mongoose.model('NotificationSchema', NotificationSchema);
+module.exports = mongoose.model('Notification', NotificationSchema);

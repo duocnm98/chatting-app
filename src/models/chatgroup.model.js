@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+  import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -15,4 +15,4 @@ let ChatGroupSchema = new Schema({
   deleteAt: { type: Number, default: null }
 });
 
-module.exports = mongoose.model('ChatGroupSchema', ChatGroupSchema);
+module.exports = mongoose.model('ChatGroup', ChatGroupSchema);
