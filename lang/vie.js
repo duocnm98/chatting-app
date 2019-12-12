@@ -5,7 +5,8 @@ export const transValidation = {
   passwordConfirm_incorrect: "Mật khẩu không khớp, vui lòng nhập lại",
   update_username: "Username giới hạn trong khoảng 3-17 kí tự, không chứa kí tự đặc biệt",
   update_address: "Địa chỉ giới hạn trong khoảng 10-30 kí tự",
-  update_phone: "Số điện thoại bắt đầu bằng 0, có 10 chữ số !!"
+  update_phone: "Số điện thoại bắt đầu bằng 0, có 10 chữ số !!",
+  keyword_find_user: "Lỗi từ khóa tìm kiếm, chỉ cho phép nhập chữ cái, số, khoảng cách"
 };
 
 export const transErrors = {
