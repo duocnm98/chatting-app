@@ -1,8 +1,10 @@
 /**
- * Created by https://trungquandev.com's author on 25/02/2018.
+ * Created by Nguyen Minh Duoc author on 12/12/2019.
  */
 
  //const socket = io('http://localhost:3000');
+const socket = io();
+
 $.ajaxSetup({
 
   headers: {
