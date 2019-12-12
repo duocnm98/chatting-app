@@ -4,18 +4,28 @@ import configViewEngine from './config/viewEngine';
 import webRoute from './routes/web.route';
 import bodyParser from 'body-parser';
 import connectFlash from 'connect-flash';
-import configSession from './config/session';
+import session from './config/session';
 import passport from 'passport';
+import http from 'http';
+import socketio from 'socket.io';
+import initSocket from './sockets/socket';
+
+import cookieParser from 'cookie-parser';
+import configSocketIo from './config/socketio';
 
 require('dotenv').config();
 //Initiate application
 let app = express();
 
+//Init server with socket.io & express app
+let server = http.createServer(app);
+let io = socketio(server);
+
 // Connect to MongoDB 
 ConnectDB();
 
 //Config session 
-configSession(app);
+session.config(app);
 
 //Config view engine
 configViewEngine(app);
@@ -26,6 +36,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Enable flash
 app.use(connectFlash());
 
+//Use cookie parser
+app.use(cookieParser());
+
 //Config passportJS
 app.use(passport.initialize());
 app.use(passport.session());
@@ -33,7 +46,14 @@ app.use(passport.session());
 //Router
 app.use('/', webRoute);
 
-app.listen(process.env.APP_PORT, () => {
+// config socket IO
+configSocketIo(io, cookieParser, session.sessionStore);
+
+
+//Init all sockets
+initSocket(io);
+
+server.listen(process.env.APP_PORT, () => {
   console.log(`hello friend! I'm runing at : ${process.env.APP_PORT}`);
 });
 

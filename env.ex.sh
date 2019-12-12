@@ -10,6 +10,9 @@ DB_PASSWORD = "***"
 APP_HOST = "***"
 APP_PORT = "***"
 
+#config sessison variables
+SESSION_KEY =  "***"
+SESSION_SECRET =  "***"
 
 #config admin email account
 MAIL_USER = "***"
