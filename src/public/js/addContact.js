@@ -20,9 +20,9 @@ function addContact() {
 
 //listen socket event from server
 socket.on("response-add-new-contact", user => {
-  let notif = `<span data-uid="${user.id}">
+  let notif = `<span class="notif-readed-false" data-uid="${user.id}">
                 <img class="avatar-small" src="images/users/${user.avatar}" alt=""> 
-                <strong>${user.username}</strong> đã gửi cho bạn lời mời kết bạn!
+                <strong>${user.username}</strong> đã gửi cho bạn một lời mời kết bạn!
               </span><br><br><br>`;
   $(".noti_content").prepend(notif);
 
