@@ -1,5 +1,5 @@
 import express from "express";
-import { home, auth, user, contact } from "./../controllers/controller";
+import { home, auth, user, contact, notification } from "./../controllers/controller";
 import { authValid, userValid, contactValid } from "../validation/validation";
 import passport from "passport";
 import initPassportLocal from "./../controllers/passportController/local";
@@ -55,5 +55,7 @@ router.put("/user/update-password", auth.checkLoggedIn, userValid.updatePassword
 router.get("/contact/find-users/:keyword", auth.checkLoggedIn, contactValid.findUsersContact, contact.findUsersContact);
 router.post("/contact/add-new", auth.checkLoggedIn, contact.addNew);
 router.delete("/contact/remove-request-contact", auth.checkLoggedIn, contact.removeRequestContact);
+
+router.get("/notification/read-more", auth.checkLoggedIn, notification.readMore);
 
 module.exports = router;
