@@ -20,7 +20,8 @@ function removeRequestContact() {
 
 //listen socket io remove request contact event
 socket.on("response-remove-request-contact", user => {
-  $(".noti_content").find(`span[data-uid = ${user.id}]`).remove();
+  $(".noti_content").find(`div[data-uid = ${user.id}]`).remove(); //popup notif
+  $("ul.list-notifications").find(`li>div[data-uid = ${user.id}]`).parent().remove();
 
   //Delete at tab model add friend request
   decreaseNumberNotifContact("count-request-contact-received");
