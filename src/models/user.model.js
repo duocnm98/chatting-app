@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-
+import { user } from "../services/service";
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
@@ -83,7 +83,11 @@ UserSchema.statics = {
       ]
     }, {_id: 1, username: 1, address: 1, avatar: 1}).exec();
   },
-    
+  
+  getNormalUserDataById(id){
+    return this.findById(id , { username : 1 , avatar : 1 , address : 1 , _id : 1}).exec();
+  },
+
   verify(token) {
     return this.findOneAndUpdate(
       { "local.verifyToken": token },

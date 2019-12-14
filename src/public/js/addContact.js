@@ -19,8 +19,6 @@ function addContact() {
           .find("ul")
           .prepend(userInfoHTML);
 
-        console.log(userInfoHTML);
-
         //real-time processing
         socket.emit("add-new-contact", { contactId: targetId });
       }
