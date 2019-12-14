@@ -10,6 +10,10 @@ function removeRequestContact() {
           $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetId}]`).hide();
           $("#find-user").find(`div.user-add-new-contact[data-uid = ${targetId}]`).css("display", "inline-block");
           decreaseNumberNotifContact("count-request-contact-sent");
+
+          //Delete at confirm tab
+          $("#request-contact-sent").find(`li[data-uid = ${targetId}]`).remove();
+
           //real-time processing
           socket.emit("remove-request-contact", { contactId: targetId });
         }
@@ -22,6 +26,8 @@ function removeRequestContact() {
 socket.on("response-remove-request-contact", user => {
   $(".noti_content").find(`div[data-uid = ${user.id}]`).remove(); //popup notif
   $("ul.list-notifications").find(`li>div[data-uid = ${user.id}]`).parent().remove();
+  //Remove add addfriend request
+  $("#request-contact-received").find(`li[data-uid = ${user.id}]`).remove();
 
   //Delete at tab model add friend request
   decreaseNumberNotifContact("count-request-contact-received");
@@ -29,4 +35,3 @@ socket.on("response-remove-request-contact", user => {
   decreaseNumberNotification("noti_contact_counter",1);
   decreaseNumberNotification("noti_counter",1);
 });
-
