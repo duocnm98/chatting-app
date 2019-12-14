@@ -1,20 +1,19 @@
-$(document).ready(function() {
-  $("#link-read-more-contactsReceived").bind("click", function() {
-    let skipNumber =  $("#request-contact-received").find("li").length;
+$(document).ready(function () {
+  $("#link-read-more-contactsReceived").bind("click", function () {
+    let skipNumber = $("#request-contact-received").find("li").length;
 
     $("#link-read-more-contactsReceived").css("display", "none");
     $(".read-more-contactsReceived-loader").css("display", "inline-block");
 
-    setTimeout(() => {
-      $.get(`/contacts/read-more-contacts-received?skipNumber=${skipNumber}`, function(newContactUsersSend) {
-        if (!newContactUsersSend.length) {
-          alertify.notify("Bạn không còn lời mời kết bạn nào để xem thêm. !", "error", 6);
-          $("#link-read-more-contactsReceived").css("display", "inline-block");
-          $(".read-more-contactsReceived-loader").css("display", "none");
-          return false
-        };
-        newContactUsersSend.forEach( user => {
-          $("#request-contact-received")
+    $.get(`/contacts/read-more-contacts-received?skipNumber=${skipNumber}`, function (newContactUsersSend) {
+      if (!newContactUsersSend.length) {
+        alertify.notify("Bạn không còn lời mời kết bạn nào để xem thêm. !", "error", 6);
+        $("#link-read-more-contactsReceived").css("display", "inline-block");
+        $(".read-more-contactsReceived-loader").css("display", "none");
+        return false
+      };
+      newContactUsersSend.forEach(user => {
+        $("#request-contact-received")
           .find("ul")
           .append(`<li class="_contactList" data-uid="${user._id}">
                     <div class="contactPanel">
@@ -38,11 +37,10 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </li>`);
-        });
+      });
 
-        $("#link-read-more-contactsReceived").css("display", "inline-block");
-        $(".read-more-contactsReceived-loader").css("display", "none");
-      })
-    }, 300);
+      $("#link-read-more-contactsReceived").css("display", "inline-block");
+      $(".read-more-contactsReceived-loader").css("display", "none");
+    });
   });
 }); 
