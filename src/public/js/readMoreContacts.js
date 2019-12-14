@@ -1,23 +1,22 @@
-$(document).ready(function() {
-  $("#link-read-more-contacts").bind("click", function() {
+$(document).ready(function () {
+  $("#link-read-more-contacts").bind("click", function () {
     let skipNumber = $("#contacts").find("li").length;
 
     $("#link-read-more-contacts").css("display", "none");
     $(".read-more-contacts-loader").css("display", "inline-block");
 
-    setTimeout(() => {
-      $.get(`/contacts/read-more-contacts?skipNumber=${skipNumber}`, function(newContactUsers) {
-        if (!newContactUsers.length) {
-          alertify.notify("Bạn không còn bạn bè nào để xem thêm.!", "error", 6);
-          $("#link-read-more-contacts").css("display", "inline-block");
-          $(".read-more-contacts-loader").css("display", "none");
-          return false;
-        };
+    $.get(`/contacts/read-more-contacts?skipNumber=${skipNumber}`, function (newContactUsers) {
+      if (!newContactUsers.length) {
+        alertify.notify("Bạn không còn bạn bè nào để xem thêm.!", "error", 6);
+        $("#link-read-more-contacts").css("display", "inline-block");
+        $(".read-more-contacts-loader").css("display", "none");
+        return false;
+      };
 
-        newContactUsers.forEach(user => {
-          $("#contacts")
-            .find("ul")
-            .append(` <li class="_contactList" data-uid="${user._id}">
+      newContactUsers.forEach(user => {
+        $("#contacts")
+          .find("ul")
+          .append(` <li class="_contactList" data-uid="${user._id}">
                         <div class="contactPanel">
                             <div class="user-avatar">
                                 <img src="images/users/${user.avatar}" alt="">
@@ -39,11 +38,10 @@ $(document).ready(function() {
                             </div>
                         </div>
                     </li>`);
-        });
-
-        $("#link-read-more-contacts").css("display", "inline-block");
-        $(".read-more-contacts-loader").css("display", "none");
       });
-    }, 300);
+
+      $("#link-read-more-contacts").css("display", "inline-block");
+      $(".read-more-contacts-loader").css("display", "none");
+    });
   });
 }); 
