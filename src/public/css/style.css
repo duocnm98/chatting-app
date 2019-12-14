@@ -254,7 +254,7 @@ label:focus,
   z-index: 999;
 }
 
-#mark-notif-readed  {
+#popup-mark-notif-readed  {
   display: block;
   color: #333;
   background: #FFF;

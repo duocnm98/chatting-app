@@ -53,6 +53,14 @@ NotificationSchema.statics = {
    */
   readMore(userId, skip ,limit){
     return this.find({ "receiverId" : userId }).sort({ "createAt": -1 }).skip(skip).limit(limit).exec();
+  },
+  markAllAsRead(userId, targetId) {
+    return this.updateMany({
+      $and: [
+        {"receiverId": userId},
+        {"senderId": {$in: targetId}}
+      ]
+    }, {"isRead": true}).exec();
   }
 }
 
@@ -75,7 +83,13 @@ const NOTIFICATION_CONTENTS = {
               </div>`;
     }
     return "No matching with any notification type.";
-  }
+  },
+
+    /**
+   * mark all notification as read
+   * @param {String} userId 
+   * @param {Array} targetId 
+   */
 };
 
 module.exports = {

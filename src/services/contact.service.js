@@ -1,6 +1,6 @@
 import UserModel from './../models/user.model';
 import ContactModel from './../models/contact.model';
-import NotificationModel from './../models/notifications.model';
+import NotificationModel from '../models/notification.model';
 import _ from 'lodash';
 
 let findUsersContact = (currentUserId, keyword) => {
