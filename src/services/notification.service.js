@@ -1,4 +1,4 @@
-import NotificationModel from "./../models/notifications.model";
+import NotificationModel from "../models/notification.model";
 import UserModel from "./../models/user.model";
 
 const LIMIT_NUMBER_TAKEN = 10;
@@ -11,7 +11,7 @@ let getNotifications = (currentUserId) => {
   return new Promise(async (resolve, reject) => {
     try {
       let notifications = await NotificationModel.model.getByUserIdAndLimit(currentUserId, LIMIT_NUMBER_TAKEN);
-      
+
       let getNotifContents = notifications.map(async (notification) => {
         let sender = await UserModel.findUserById(notification.senderId);
         return NotificationModel.contents.getContent(notification.type, notification.isRead, sender._id, sender.username, sender.avatar);
@@ -47,7 +47,7 @@ let readMore = (currentUserId, skipNumberNotification) => {
   return new Promise(async (resolve, reject) => {
     try {
       let newNotifications = await NotificationModel.model.readMore(currentUserId, skipNumberNotification, LIMIT_NUMBER_TAKEN);
-      
+
       let getNotifContents = newNotifications.map(async (notification) => {
         let sender = await UserModel.findUserById(notification.senderId);
         return NotificationModel.contents.getContent(notification.type, notification.isRead, sender._id, sender.username, sender.avatar);
@@ -59,10 +59,22 @@ let readMore = (currentUserId, skipNumberNotification) => {
   });
 };
 
+let markAllAsRead = (currentUserId, targetUsers) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await NotificationModel.model.markAllAsRead(currentUserId, targetUsers);
+      resolve(true);
+    } catch (error) {
+      console.log(`Error when mark notifications as read : ${error}`);
+      reject(false);
+    }
+  });
+}
 
 
 module.exports = {
   getNotifications: getNotifications,
   countNotifUnread: countNotifUnread,
-  readMore: readMore
+  readMore: readMore,
+  markAllAsRead: markAllAsRead
 };
