@@ -28,7 +28,7 @@ module.exports.index = async (req, res) => {
     success: req.flash('success'),
     user: req.user,
     notifications: notifications,
-    countNotifUnread: countNotifUnread,
+    countNotifUnread: countNotifUnread, 
     contacts : contacts , 
     contactsSent : contactsSent , 
     contactsReceived : contactsReceived,

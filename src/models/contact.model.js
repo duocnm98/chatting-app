@@ -33,9 +33,17 @@ ContactSchema.statics = {
     }).exec();
   },
 
-  removeRequestContactSent(userId, contactId) {
-    return this.remove({
-      $and: [{ userId: userId }, { contactId: contactId }]
+  /**
+   * Remove contact
+   * @param {String} userId 
+   * @param {String} contactId 
+   */
+  removeContact(userId, contactId){
+    this.remove({
+      $or: [
+        { $and: [{ userId: userId }, { contactId: contactId }, { status: true }] },
+        { $and: [{ userId: contactId }, { contactId: userId }, { status: true }] }
+      ]
     }).exec();
   },
 
@@ -55,6 +63,7 @@ ContactSchema.statics = {
       ]}
     ).sort({"createdAt" : -1}).limit(limit).exec();
   },
+
   getContactsSent(userId , limit){
     return this.find({
       $and : [
@@ -63,6 +72,7 @@ ContactSchema.statics = {
       ]}
     ).sort({"createdAt" : -1}).limit(limit).exec();
   },
+
   getContactsReceived(userId ,limit){
     return this.find({
       $and : [
@@ -70,7 +80,57 @@ ContactSchema.statics = {
          {"status" : false}
       ]}
     ).sort({"createdAt" : -1}).limit(limit).exec();
-  },/**
+  },
+
+  /**
+   * 
+   * @param {String} userId 
+   * @param {String} contactId 
+   */
+  removeRequestContactSent(userId, contactId) {
+    return this.remove({
+      $and: [
+        { userId: userId },
+         { contactId: contactId },
+         {"status" : false}
+        ]
+    }).exec();
+  },
+    
+    
+  /**
+   * Remove request contact received
+   * @param {String} userId 
+   * @param {String} contactId 
+   */
+  removeRequestContactReceived(userId, contactId) {
+    return this.remove({
+      $and: [
+        {"userId": contactId},
+        {"contactId": userId},
+        {"status" : false}
+      ]
+    }).exec();
+  },
+
+  /**
+   * Approve request contact received
+   * @param {String: of currentUser} userId 
+   * @param {String} contactId 
+   */
+  approveRequestContactReceived(userId, contactId) {
+    return this.update({
+      $and: [
+        {"userId": contactId},
+        {"contactId": userId},
+        {"status" : false}
+      ]
+    },{"status" : true}).exec();
+  },
+  
+
+  
+  /**
    * Count all contacts
    * @param {string} userId 
    */

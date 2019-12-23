@@ -248,7 +248,6 @@ function callUpdateUserPassword() {
     type: "put",
     data: userUpdatePassword,
     success: function(result) {
-      console.log(result);
       //Display success
       $(".user-modal-password-alert-success")
         .find("span")

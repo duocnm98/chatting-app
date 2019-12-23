@@ -197,8 +197,8 @@ label:focus,
 .contactPanel .user-talk,
 .contactPanel .user-remove-contact,
 .contactPanel .user-remove-request-contact-sent,
-.contactPanel .user-acccept-contact-received,
-.contactPanel .user-reject-request-contact-received {
+.contactPanel .user-approve-request-contact-received,
+.contactPanel .user-remove-request-contact-received {
   box-sizing: border-box;
   display: inline-flex;
   flex-shrink: 0;
@@ -226,10 +226,10 @@ label:focus,
   fill: #fff;
   margin: 10px 0px 5px 2px;
 }
-
+/* 
 .contactPanel .user-remove-request-contact-sent {
   display: none;
-}
+} */
 
 .contactPanel .action-danger {
   border-color: #ff7675;
