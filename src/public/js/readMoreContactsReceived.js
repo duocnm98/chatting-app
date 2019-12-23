@@ -29,16 +29,17 @@ $(document).ready(function () {
                         <div class="user-address">
                             <span>&nbsp ${user.address ? user.address : ""}</span>
                         </div>
-                        <div class="user-acccept-contact-received" data-uid="${user._id}">
+                        <div class="user-approve-request-contact-received" data-uid="${user._id}">
                             Chấp nhận
                         </div>
-                        <div class="user-reject-request-contact-received action-danger" data-uid="${user._id}">
+                        <div class="user-remove-request-contact-received action-danger" data-uid="${user._id}">
                             Xóa yêu cầu
                         </div>
                     </div>
                 </li>`);
       });
-
+      removeRequestContactReceived();
+      approveRequestContactReceived(); 
       $("#link-read-more-contactsReceived").css("display", "inline-block");
       $(".read-more-contactsReceived-loader").css("display", "none");
     });
