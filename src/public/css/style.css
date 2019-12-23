@@ -680,7 +680,7 @@ label:focus,
 }
 
 .left a.create-group-chat {
-  display: none;
+    display: block;
   float: left;
   width: 40px;
   height: 40px;
@@ -1286,7 +1286,13 @@ label:focus,
   margin-right: 45px;
 }
 
-.read-more-notif , .read-more-contacts , .read-more-contactsSent , .read-more-contactsReceived{
+.read-more-notif , 
+.read-more-contacts , 
+.read-more-contactsSent , 
+.read-more-contactsReceived,
+.read-more-all-chat, 
+.read-more-user-chat, 
+.read-more-group-chat {
   text-align: center;
 }
 
@@ -1514,4 +1520,8 @@ label:focus,
 
 .display-important {
   display: inline-block !important;
+}
+
+.tab-content > .active {
+  background-color: #FFFFFF;
 }
