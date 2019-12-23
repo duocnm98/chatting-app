@@ -3,7 +3,7 @@ import ContactModel from './../models/contact.model';
 import NotificationModel from '../models/notification.model';
 import _ from 'lodash';
 
-const LIMIT_NUMBER = 1 ; 
+const LIMIT_NUMBER = 10 ; 
 
 let findUsersContact = (currentUserId, keyword) => {
   return new Promise(async (resolve, reject) => {
@@ -113,17 +113,17 @@ let approveRequestContactReceived = (currentUserId, contactId) => {
 };
 
 
-let getContacts = (currenUserId) => {
+let getContacts = (currentUserId) => {
   return new Promise(async (resolve , reject) => {
     try {
-      let contacts = await ContactModel.getContacts(currenUserId , LIMIT_NUMBER);
+      let contacts = await ContactModel.getContacts(currentUserId , LIMIT_NUMBER);
       let users = contacts.map( async ( contact ) => {
-        if(contact.contactId == currenUserId){
+        if(contact.contactId == currentUserId){
           return await UserModel.getNormalUserDataById(contact.userId)
         }else{
           return await UserModel.getNormalUserDataById(contact.contactId);
         }
-      })
+      });
       resolve(await Promise.all(users))
     } catch (error) {
       reject(error)
