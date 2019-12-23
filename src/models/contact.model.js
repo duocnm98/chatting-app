@@ -7,9 +7,9 @@ let ContactSchema = new Schema({
   userId: String,
   contactId: String,
   status: { type: Boolean, default: false },
-  createAt: { type: Number, default: Date.now },
-  updateAt: { type: Number, default: null },
-  deleteAt: { type: Number, default: null }
+  createdAt: { type: Number, default: Date.now },
+  updatedAt: { type: Number, default: null },
+  deletedAt: { type: Number, default: null }
 });
 
 ContactSchema.statics = {
@@ -61,7 +61,7 @@ ContactSchema.statics = {
          ]} , 
          {"status" : true}
       ]}
-    ).sort({"createdAt" : -1}).limit(limit).exec();
+    ).sort({"updatedAt" : -1}).limit(limit).exec();
   },
 
   getContactsSent(userId , limit){
@@ -125,10 +125,11 @@ ContactSchema.statics = {
         {"contactId": userId},
         {"status" : false}
       ]
-    },{"status" : true}).exec();
+    },{
+      "status" : true,
+      "updatedAt": Date.now()
+    }).exec();
   },
-  
-
   
   /**
    * Count all contacts
@@ -180,7 +181,7 @@ ContactSchema.statics = {
         ]},
         {"status" : true }
       ]
-    }).sort({"createdAt" : -1}).skip(skipNumber).limit(limit).exec();
+    }).sort({"updatedAt" : -1}).skip(skipNumber).limit(limit).exec();
   },
 
   readMoreContactsSent(userId , skipNumber , limit){

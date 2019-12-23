@@ -16,11 +16,11 @@ let getAllConversationItems = (currentUserId) => {
       let userConversationsPromise = contacts.map( async ( contact ) => {
         if(contact.contactId == currentUserId){
           let getUserContact = await UserModel.getNormalUserDataById(contact.userId)
-          getUserContact.createAt = contact.createAt;
+          getUserContact.updatedAt = contact.updatedAt;
           return getUserContact;
         }else{
           let getUserContact = await UserModel.getNormalUserDataById(contact.contactId);
-          getUserContact.createAt = contact.createAt;
+          getUserContact.updatedAt = contact.updatedAt;
           return getUserContact;
         }
       });
@@ -29,9 +29,11 @@ let getAllConversationItems = (currentUserId) => {
       let groupConversations = await ChatGroupModel.getChatGroups(currentUserId, LIMIT_CONVERSATION);
       let allConversations = userConversations.concat(groupConversations);
       
+      //sort conversations by updatedAt 
       allConversations = _.sortBy(allConversations, (item) => {
-        return -item.createAt;
+        return -item.updatedAt;
       });
+
       resolve({
         userConversations: userConversations,
         groupConversations: groupConversations,
