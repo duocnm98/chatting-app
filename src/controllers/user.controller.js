@@ -39,7 +39,7 @@ let updateAvatar = (req, res) => {
     try {
       let updateUserItem = {
         avatar: req.file.filename,
-        updateAt: Date.now()
+        updatedAt: Date.now()
       };
       //Update user
       let userUpdate = await user.updateUser(req.user._id, updateUserItem);

@@ -39,7 +39,7 @@ socket.on("response-remove-contact", function (user) {
   $("#contacts").find(`ul li[data-uid=${user.id}]`).remove();
   decreaseNumberNotifContact("count-contacts");  //js/calculateNotifContact
 });
-
+  
 $(document).ready(function () {
   removeContact();
 }); 

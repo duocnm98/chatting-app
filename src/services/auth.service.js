@@ -9,7 +9,7 @@ let register = (email, gender, password, protocol, host) => {
     //Check is email exist ??
     let userByEmail = await UserModel.findByEmail(email);
     if (userByEmail) {
-      if (userByEmail.deleteAt != null) {
+      if (userByEmail.deletedAt != null) {
         return reject(transErrors.account_removed);
       }
       if (!userByEmail.local.isActive) {

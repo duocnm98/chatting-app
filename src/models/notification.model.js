@@ -8,7 +8,7 @@ let NotificationSchema = new Schema({
   type: String,
   context: String,
   isRead: {type: Boolean, default: false},
-  createAt: {type: Number, default: Date.now}
+  createdAt: {type: Number, default: Date.now}
 });
 
 NotificationSchema.statics = {
@@ -29,7 +29,7 @@ NotificationSchema.statics = {
    * @param {number} limit 
    */
   getByUserIdAndLimit(userId, limit) {
-    return this.find({ "receiverId" : userId }).sort({ "createAt": -1 }).limit(limit).exec();
+    return this.find({ "receiverId" : userId }).sort({ "createdAt": -1 }).limit(limit).exec();
   },
 
   /**
@@ -52,7 +52,7 @@ NotificationSchema.statics = {
    * @param {Number} limit 
    */
   readMore(userId, skip ,limit){
-    return this.find({ "receiverId" : userId }).sort({ "createAt": -1 }).skip(skip).limit(limit).exec();
+    return this.find({ "receiverId" : userId }).sort({ "createdAt": -1 }).skip(skip).limit(limit).exec();
   },
   markAllAsRead(userId, targetId) {
     return this.updateMany({
