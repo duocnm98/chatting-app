@@ -49,9 +49,11 @@ function enableEmojioneArea(divId) {
     shortnames: false,
     events: {
       keyup: function(editor, event) {
+        //assign value in hiden input tag
         $(`#write-chat-${divId}`).val(this.getText());
       },
       click: function() {
+        // Enable to listening DOM event for typing message content
         textAndEmojiChat(divId);
       }
     },
@@ -226,5 +228,5 @@ $(document).ready(function() {
   changeScreenChat();
 
   //auto click at first item went loading page
-  $("ul.people").find("li")[0].click();
+  $("ul.people").find("a")[0].click();
 });

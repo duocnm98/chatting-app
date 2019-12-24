@@ -30,6 +30,14 @@ let MessageSchema = new Schema({
 
 MessageSchema.statics = {
   /**
+   * create new Message
+   * @param {Object} item 
+   */
+  createNew(item){
+    return this.create(item);
+  },
+
+  /**
    * get Messages in personal message limited
    * @param {string} senderId
    * @param {string} receiverId
@@ -67,6 +75,6 @@ const MESSAGE_TYPES = {
 
 module.exports = {
   model: mongoose.model("message", MessageSchema),
-  consersationTypes: MESSAGE_CONVERSATION_TYPES,
+  conversationTypes: MESSAGE_CONVERSATION_TYPES,
   messageTypes: MESSAGE_TYPES
 };

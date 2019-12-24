@@ -6,7 +6,8 @@ export const transValidation = {
   update_username: "Username giới hạn trong khoảng 3-17 kí tự, không chứa kí tự đặc biệt",
   update_address: "Địa chỉ giới hạn trong khoảng 10-30 kí tự",
   update_phone: "Số điện thoại bắt đầu bằng 0, có 10 chữ số !!",
-  keyword_find_user: "Lỗi từ khóa tìm kiếm, chỉ cho phép nhập chữ cái, số, khoảng cách"
+  keyword_find_user: "Lỗi từ khóa tìm kiếm, chỉ cho phép nhập chữ cái, số, khoảng cách",
+  message_text_emoji_incorrect: "Tin nhắn không hợp lệ, ít nhất 1 ký tự, tối đa 400 ký tự"
 };
 
 export const transErrors = {
@@ -19,7 +20,8 @@ export const transErrors = {
   server_error: "Server bị lỗi, vui lòng thử lại sau !!",
   avatar_type: "Kiểu file ảnh không hợp lệ. Vui lòng chọn ảnh .PNG hoặc .JPG",
   avatar_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !",
-  password_match: "Mật khẩu hiện tại không chính xác"
+  password_match: "Mật khẩu hiện tại không chính xác",
+  conversation_not_found: "Cuộc trò chuyện không tồn tại."
 };
 
 export const transSuccess = {

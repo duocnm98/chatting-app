@@ -19,9 +19,9 @@
         
       //call send message
       $.post("/message/add-new-text-emoji", dataTextEmojiForSend, function (data){
-        //success
+        console.log(data.message);
       }).fail(function (response) {
-        //error
+        alertify.notify(response.responseText, "error", 7);
       });
     }
   });
