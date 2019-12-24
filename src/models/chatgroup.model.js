@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 let ChatGroupSchema = new Schema({
   name: String,
   usersAmount: {type: Number, min: 3, max: 177},
-  messagesAmount:{type: Number, default: 0},
+  messageAmount:{type: Number, default: 0},
   userId: String,
   members: [
     {userId: String}

@@ -1,4 +1,5 @@
 import { notification, contact, message } from "./../services/service";
+import { bufferToBase64 } from "./../helpers/clientHelper";
 
 module.exports.index = async (req, res) => {
   //only 10 items one time
@@ -26,6 +27,9 @@ module.exports.index = async (req, res) => {
   let userConversations = getAllConversationItems.userConversations;
   let groupConversations = getAllConversationItems.groupConversations;
 
+  //all messages with conversation
+  let allConversationWithMessages = getAllConversationItems.allConversationWithMessages;
+
 
   return res.render("main/home/home", {
     errors: req.flash("errors"),
@@ -41,7 +45,9 @@ module.exports.index = async (req, res) => {
     countAllContactsReceived: countAllContactsReceived,
     allConversations: allConversations,
     userConversations: userConversations,
-    groupConversations: groupConversations
+    groupConversations: groupConversations,
+    allConversationWithMessages: allConversationWithMessages,
+    bufferToBase64: bufferToBase64
   });
 };
 
