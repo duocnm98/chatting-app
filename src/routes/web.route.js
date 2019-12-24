@@ -1,6 +1,6 @@
 import express from "express";
-import { home, auth, user, contact, notification } from "./../controllers/controller";
-import { authValid, userValid, contactValid } from "../validation/validation";
+import { home, auth, user, contact, notification, message } from "./../controllers/controller";
+import { authValid, userValid, contactValid, messageValid } from "../validation/validation";
 import passport from "passport";
 import initPassportLocal from "./../controllers/passportController/local";
 import initPassportFacebook from "./../controllers/passportController/facebook";
@@ -65,5 +65,7 @@ router.get("/contacts/read-more-contacts-received" , auth.checkLoggedIn , contac
 
 router.get("/notification/read-more", auth.checkLoggedIn, notification.readMore);
 router.put("/notification/mark-all-as-read", auth.checkLoggedIn, notification.markAllAsRead);
+
+router.post("/message/add-new-text-emoji", auth.checkLoggedIn, messageValid.checkMessageLength, message.addNewTextEmoji);
 
 module.exports = router;
