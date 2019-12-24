@@ -5,7 +5,7 @@
             <div class="right tab-pane <% if (index === 0) { %> active <% } %>" data-chat="<%= conversation._id%>"
                 id="to_<%= conversation._id%>">
                 <div class="top">
-                    <span>To: <span class="name"> <%= conversation.username %></span></span>
+                    <span>To: <span class="name"> <%= conversation.name %></span></span>
                     <span class="chat-menu-right">
                         <a href="#attachsModal_<%= conversation._id %>" class="show-attachs" data-toggle="modal">
                             Tệp đính kèm
