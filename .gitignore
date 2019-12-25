@@ -62,3 +62,5 @@ typings/
 
 #bower_component lib folder
 src/public/bower_components
+
+src/public/emojione

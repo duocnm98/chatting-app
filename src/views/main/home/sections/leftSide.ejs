@@ -32,7 +32,7 @@
                             <span class="time">
                                 <%= convertTimestampToHumanTime(lastItemOfArray(conversation.messages).createdAt) %>
                             </span>
-                            <span class="preview">
+                            <span class="preview convert-emoji">
                                 <% if (lastItemOfArray(conversation.messages).messageType === "text") { %>
                                     <%= lastItemOfArray(conversation.messages).text %>
                                 <% } %>
@@ -62,7 +62,7 @@
                             <span class="time">
                                 <%= convertTimestampToHumanTime(lastItemOfArray(conversation.messages).createdAt) %>
                             </span>
-                            <span class="preview">
+                            <span class="preview convert-emoji">
                                 <% if (lastItemOfArray(conversation.messages).messageType === "text") { %>
                                     <%= lastItemOfArray(conversation.messages).text %>
                                 <% } %>
@@ -110,7 +110,7 @@
                                     <span class="time">
                                         <%= convertTimestampToHumanTime(lastItemOfArray(conversation.messages).createdAt) %>
                                     </span>
-                                    <span class="preview">
+                                    <span class="preview convert-emoji">
                                         <% if (lastItemOfArray(conversation.messages).messageType === "text") { %>
                                             <%= lastItemOfArray(conversation.messages).text %>
                                         <% } %>
@@ -143,7 +143,7 @@
                     <% allConversationWithMessages.forEach(function (conversation) { %>
                         <% if(conversation.members) { %>
                             <a href="#uid_<% conversation._id%>" class="room-chat" data-target="#to_<%= conversation._id%>">
-                                <li class="person group-chat" data-chat="<% conversation._id%>">
+                                <li class="person group-chat" data-chat="<%= conversation._id%>">
                                     <div class="left-avatar">
                                         <!-- <div class="dot"></div> -->
                                         <img src="images/users/group-avatar-trungquandev.png" alt="">
@@ -160,7 +160,7 @@
                                     <span class="time">
                                         <%= convertTimestampToHumanTime(lastItemOfArray(conversation.messages).createdAt) %>
                                     </span>
-                                    <span class="preview">
+                                    <span class="preview convert-emoji">
                                         <% if (lastItemOfArray(conversation.messages).messageType === "text") { %>
                                             <%= lastItemOfArray(conversation.messages).text %>
                                         <% } %>

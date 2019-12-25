@@ -49,7 +49,7 @@ MessageSchema.statics = {
         { $and: [{ "senderId": senderId }, { "receiverId": receiverId }] },
         { $and: [{ "senderId": receiverId }, { "receiverId": senderId }] }
       ]
-    }).sort({ "createdAt": 1 }).limit(limit).exec();
+    }).sort({ "createdAt": -1 }).limit(limit).exec();
   },
 
     /**
@@ -58,7 +58,7 @@ MessageSchema.statics = {
    * @param {number} limit
    */
   getMessagesInGroup(receiverId, limit) {
-    return this.find({ "receiverId": receiverId }).sort({ "createdAt": 1 }).limit(limit).exec();
+    return this.find({ "receiverId": receiverId }).sort({ "createdAt": -1 }).limit(limit).exec();
   }
 };
 
