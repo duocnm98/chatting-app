@@ -22,6 +22,7 @@ export const transErrors = {
   image_message_type: "Kiểu file ảnh không hợp lệ. Vui lòng chọn ảnh .PNG hoặc .JPG",
   avatar_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !",
   image_message_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !",
+  attachment_message_size: "Vui lòng chọn tệp có kích thước dưới 1 Megabyte !",
   password_match: "Mật khẩu hiện tại không chính xác",
   conversation_not_found: "Cuộc trò chuyện không tồn tại."
 };
