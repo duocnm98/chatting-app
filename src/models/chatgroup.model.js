@@ -1,4 +1,4 @@
-  import mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -44,7 +44,13 @@ ChatGroupSchema.statics = {
        "messageAmount" : newMessageAmount,
        "updatedAt" : Date.now()
      }).exec();
+  },
+
+  getChatGroupIdsByUser(userId){
+    return this.find({
+      "members": {$elemMatch: {"userId": userId}}
+    }, {_id: 1}).exec();
   }
 };
 
-module.exports = mongoose.model('chat-group', ChatGroupSchema);
+module.exports = mongoose.model("chat-group", ChatGroupSchema);
