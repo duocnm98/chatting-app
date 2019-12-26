@@ -29,9 +29,7 @@ function nineScrollRight(divId) {
     cursorwidth: "7px",
     scrollspeed: 50
   });
-  $(`.right .chat[data-chat=${divId}]`).scrollTop(
-    $(`.right .chat[data-chat=${divId}]`)[0].scrollHeight
-  );
+  $(`.right .chat[data-chat=${divId}]`).scrollTop($(`.right .chat[data-chat=${divId}]`)[0].scrollHeight);
 }
 
 function enableEmojioneArea(divId) {
@@ -214,6 +212,9 @@ function changeScreenChat() {
 
       // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
       enableEmojioneArea(divId);
+
+      //Turn on listen DOM for image message function
+      imageChat(divId);
     });
 }
 

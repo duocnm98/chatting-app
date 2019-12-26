@@ -840,9 +840,9 @@ label:focus,
   flex-direction: column;
 }
 
-#image-chat,
-#attach-chat {
-  display: none;
+.image-chat,
+.attach-chat {
+  display: none !important;
 }
 
 .room-chat:hover,
@@ -1546,5 +1546,5 @@ label:focus,
 
 .message-time-realtime {
   color: #e74c3c !important;
-  font-weight: bold}
+  font-weight: bold;
 }
