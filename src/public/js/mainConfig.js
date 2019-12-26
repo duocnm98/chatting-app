@@ -44,23 +44,23 @@ function enableEmojioneArea(divId) {
     search: false,
     shortnames: false,
     events: {
-      keyup: function(editor, event) {
+      keyup: function (editor, event) {
         //assign value in hiden input tag
         $(`#write-chat-${divId}`).val(this.getText());
       },
-      click: function() {
+      click: function () {
         // Enable to listening DOM event for typing message content
         textAndEmojiChat(divId);
         // Turn on message typing
         typingOn(divId);
       },
       blur: function () {
-         //Turn off message typing
+        //Turn off message typing
         typingOff(divId);
       }
     }
   });
-  $(".icon-chat").bind("click", function(event) {
+  $(".icon-chat").bind("click", function (event) {
     event.preventDefault();
     $(".emojionearea-button").click();
     $(".emojionearea-editor").focus();
@@ -77,16 +77,16 @@ function spinLoading() {
 
 function ajaxLoading() {
   $(document)
-    .ajaxStart(function() {
+    .ajaxStart(function () {
       spinLoading();
     })
-    .ajaxStop(function() {
+    .ajaxStop(function () {
       spinLoaded();
     });
 }
 
 function showModalContacts() {
-  $("#show-modal-contacts").click(function() {
+  $("#show-modal-contacts").click(function () {
     $(this)
       .find(".noti_contact_counter")
       .fadeOut("slow");
@@ -94,12 +94,12 @@ function showModalContacts() {
 }
 
 function configNotification() {
-  $("#noti_Button").click(function() {
+  $("#noti_Button").click(function () {
     $("#notifications").fadeToggle("fast", "linear");
     $(".noti_counter").fadeOut("slow");
     return false;
   });
-  $(".main-content").click(function() {
+  $(".main-content").click(function () {
     $("#notifications").fadeOut("fast", "linear");
   });
 }
@@ -107,9 +107,11 @@ function configNotification() {
 function gridPhotos(layoutNumber) {
   $(".show-images")
     .unbind("click")
-    .on("click", function() {
+    .on("click", function () {
       let href = $(this).attr("href");
       let modalImagesId = href.replace("#", "");
+
+      let originalDataImage = $(`#${modalImagesId}`).find("div.modal-body").html();
 
       let countRows = Math.ceil(
         $(`#${modalImagesId}`).find("div.all-images>img").length / layoutNumber
@@ -122,7 +124,7 @@ function gridPhotos(layoutNumber) {
           rel: "withhearts-gallery",
           gutter: "2px",
           layout: layoutStr,
-          onComplete: function() {
+          onComplete: function () {
             $(`#${modalImagesId}`)
               .find(".all-images")
               .css({
@@ -138,25 +140,30 @@ function gridPhotos(layoutNumber) {
               });
           }
         });
+      
+      //Catch close modal event 
+      $(`#${modalImagesId}`).on("hidden.bs.modal", function () {
+        $(this).find("div.modal-body").html(originalDataImage);
+      })
     });
 }
 
 function addFriendsToGroup() {
   $("ul#group-chat-friends")
     .find("div.add-user")
-    .bind("click", function() {
+    .bind("click", function () {
       let uid = $(this).data("uid");
       $(this).remove();
       let html = $("ul#group-chat-friends")
         .find("div[data-uid=" + uid + "]")
         .html();
 
-      let promise = new Promise(function(resolve, reject) {
+      let promise = new Promise(function (resolve, reject) {
         $("ul#friends-added").append(html);
         $("#groupChatModal .list-user-added").show();
         resolve(true);
       });
-      promise.then(function(success) {
+      promise.then(function (success) {
         $("ul#group-chat-friends")
           .find("div[data-uid=" + uid + "]")
           .remove();
@@ -165,10 +172,10 @@ function addFriendsToGroup() {
 }
 
 function cancelCreateGroup() {
-  $("#cancel-group-chat").bind("click", function() {
+  $("#cancel-group-chat").bind("click", function () {
     $("#groupChatModal .list-user-added").hide();
     if ($("ul#friends-added>li").length) {
-      $("ul#friends-added>li").each(function(index) {
+      $("ul#friends-added>li").each(function (index) {
         $(this).remove();
       });
     }
@@ -183,7 +190,7 @@ function flashMasterNotify() {
 }
 
 function changeTypeChat() {
-  $("#select-type-chat").bind("change", function() {
+  $("#select-type-chat").bind("change", function () {
     let optionSelected = $("option:selected", this);
     optionSelected.tab("show");
 
@@ -198,7 +205,7 @@ function changeTypeChat() {
 function changeScreenChat() {
   $(".room-chat")
     .unbind("click")
-    .on("click", function() {
+    .on("click", function () {
       let divId = $(this)
         .find("li")
         .data("chat");
@@ -219,14 +226,14 @@ function changeScreenChat() {
 }
 
 function convertEmoji() {
-  $(".convert-emoji").each(function() {
+  $(".convert-emoji").each(function () {
     var original = $(this).html();
     // use .shortnameToImage if only converting shortnames (for slightly better performance)
     var converted = emojione.toImage(original);
     $(this).html(converted);
   });
 }
-$(document).ready(function() {
+$(document).ready(function () {
   // Hide số thông báo trên đầu icon mở modal contact
   showModalContacts();
 
