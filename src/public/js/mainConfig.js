@@ -53,6 +53,12 @@ function enableEmojioneArea(divId) {
       click: function() {
         // Enable to listening DOM event for typing message content
         textAndEmojiChat(divId);
+        // Turn on message typing
+        typingOn(divId);
+      },
+      blur: function () {
+         //Turn off message typing
+        typingOff(divId);
       }
     }
   });

@@ -64,6 +64,15 @@ function textAndEmojiChat(divId) {
 
 				//Step 06: Emit realtime
 				socket.emit("chat-text-emoji", dataToEmit);
+
+				//Step 07: Emit remove typing realtime
+				typingOff(divId);
+
+				//Step 08: Remove immediate if this has typing
+				let checkTyping = $(`.chat[data-chat=${divId}]`).find("div.bubble-typing-gif");
+				if (checkTyping.length) {
+					checkTyping.remove();
+				}
 			}).fail(function (response) {
 				alertify.notify(response.responseText, "error", 7);
 			});
@@ -118,5 +127,7 @@ $(document).ready(function () {
 		$(`.person[data-chat=${divId}]`).trigger("jqnamespace.moveConversationToTheTop");
 
 		//Step 06: Emit realtime: nothing to code :|
+		//Step 07: Emit remove typing realtime: nothing to code :|
+		//Step 08: Remove immediate if this has typing: nothing to code :|
 	});
 });
