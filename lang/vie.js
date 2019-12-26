@@ -19,7 +19,9 @@ export const transErrors = {
   login_failed: "Sai tài khoản hoặc mật khẩu",
   server_error: "Server bị lỗi, vui lòng thử lại sau !!",
   avatar_type: "Kiểu file ảnh không hợp lệ. Vui lòng chọn ảnh .PNG hoặc .JPG",
+  image_message_type: "Kiểu file ảnh không hợp lệ. Vui lòng chọn ảnh .PNG hoặc .JPG",
   avatar_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !",
+  image_message_size: "Vui lòng chọn ảnh có kích thước dưới 1 Megabyte !",
   password_match: "Mật khẩu hiện tại không chính xác",
   conversation_not_found: "Cuộc trò chuyện không tồn tại."
 };

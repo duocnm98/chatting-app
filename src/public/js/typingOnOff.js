@@ -33,7 +33,7 @@ $(document).ready(function() {
           return false;
         }
         $(`.chat[data-chat=${response.currentGroupId}]`).append(messageTyping);
-        nineScrollRight(response.currentGroupId);
+        // nineScrollRight(response.currentGroupId);
       }
     }
     else {
@@ -42,7 +42,7 @@ $(document).ready(function() {
         return false;
       }
       $(`.chat[data-chat=${response.currentUserId}]`).append(messageTyping);
-      nineScrollRight(response.currentUserId);
+      // nineScrollRight(response.currentUserId);
     }
   });
 
