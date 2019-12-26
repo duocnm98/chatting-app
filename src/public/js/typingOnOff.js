@@ -56,7 +56,7 @@ $(document).ready(function() {
     }
     else {
       $(`.chat[data-chat=${response.currentUserId}]`).find("div.bubble-typing-gif").remove();
-      nineScrollRight(response.currenUseryId);
+      nineScrollRight(response.currentUseryId);
     }
   });
 });

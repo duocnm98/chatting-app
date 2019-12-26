@@ -26,7 +26,7 @@ function textAndEmojiChat(divId) {
 				};
 
 				//Step 01: Handle message data before show 
-				let messageOfMe = $(`<div class="bubble me data-mess-id="${data.message._id}"></div>`);
+				let messageOfMe = $(`<div class="bubble me" data-mess-id="${data.message._id}"></div>`);
 				messageOfMe.text(data.message.text);
 				let convertEmojiMessage = emojione.toImage(messageOfMe.html());
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
 
 		let divId = "";
 		//Step 01: Handle message data before show 
-		let messageOfYou = $(`<div class="bubble you data-mess-id="${response.message._id}"></div>`);
+		let messageOfYou = $(`<div class="bubble you" data-mess-id="${response.message._id}"></div>`);
 		messageOfYou.text(response.message.text);
 		let convertEmojiMessage = emojione.toImage(messageOfYou.html());
 
