@@ -222,6 +222,9 @@ function changeScreenChat() {
 
       //Turn on listen DOM for image message function
       imageChat(divId);
+      
+      //Turn on listen DOM for attachment message function
+      attachmentChat(divId);
     });
 }
 
@@ -233,6 +236,14 @@ function convertEmoji() {
     $(this).html(converted);
   });
 }
+
+function bufferToBase64(buffer) {
+  return btoa(
+   new Uint8Array(buffer)
+     .reduce((data, byte) => data + String.fromCharCode(byte), "")
+ );
+}
+
 $(document).ready(function () {
   // Hide số thông báo trên đầu icon mở modal contact
   showModalContacts();
