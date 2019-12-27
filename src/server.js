@@ -12,10 +12,15 @@ import initSocket from './sockets/socket';
 
 import cookieParser from 'cookie-parser';
 import configSocketIo from './config/socketio';
+import events from "events";
+import * as configApp from './config/app';
+
 
 require('dotenv').config();
 //Initiate application
 let app = express();
+
+events.EventEmitter.defaultMaxListeners = configApp.app.max_event_listener;
 
 //Init server with socket.io & express app
 let server = http.createServer(app);

@@ -225,6 +225,9 @@ function changeScreenChat() {
       
       //Turn on listen DOM for attachment message function
       attachmentChat(divId);
+
+      //Turn on video chat DOM for videocall funciton 
+      videoChat(divId);
     });
 }
 
@@ -284,4 +287,7 @@ $(document).ready(function () {
     .find("a")[0]
     .click();
 
+  $("#video-chat-group").bind("click", function() {
+    alertify.notify("Videocall không khả dụng khi trò chuyện nhóm!", "error", 7);
+  });
 });
