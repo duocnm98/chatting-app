@@ -2,8 +2,7 @@
     <div class="tab-content" id="screen-chat">
         <% allConversationWithMessages.forEach(function (conversation, index) { %>
         <% if(conversation.members) { %>
-            <div class="right tab-pane <% if (index === 0) { %> active <% } %>" data-chat="<%= conversation._id%>"
-                id="to_<%= conversation._id%>">
+            <div class="right tab-pane <% if (index === 0) { %> active <% } %>" data-chat="<%= conversation._id%>" id="to_<%= conversation._id%>">
                 <div class="top">
                     <span>To: <span class="name"> <%= conversation.name %></span></span>
                     <span class="chat-menu-right">

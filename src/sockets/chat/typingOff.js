@@ -1,4 +1,4 @@
-import {pushSocketIdToArray, removeSocketIdFromArray, emitNotifyToArray} from "./../../helpers/socketHelper";
+import { pushSocketIdToArray, removeSocketIdFromArray, emitNotifyToArray } from "./../../helpers/socketHelper";
 /**
  * 
  * @param {*} io from socket.io lb 
@@ -6,11 +6,20 @@ import {pushSocketIdToArray, removeSocketIdFromArray, emitNotifyToArray} from ".
 let typingOff = (io) => {
   let clients = {};
   io.on("connection", (socket) => {
-    
+
     //push socketid to array
-    clients = pushSocketIdToArray(clients, socket.request.user._id,socket.id);
+    clients = pushSocketIdToArray(clients, socket.request.user._id, socket.id);
     socket.request.user.chatGroupIds.forEach(group => {
-      clients = pushSocketIdToArray(clients, group._id,socket.id);
+      clients = pushSocketIdToArray(clients, group._id, socket.id);
+    });
+
+    //When has new group chat 
+    socket.on("new-group-created", (data) => {
+      clients = pushSocketIdToArray(clients, data.groupChat._id, socket.id);
+    });
+
+    socket.on("member-received-group-chat", (data) => {
+      clients = pushSocketIdToArray(clients, data.groupChatId, socket.id);
     });
     socket.on("user-is-not-typing", (data) => {
       //collect all neccesary data to display on notification
@@ -19,19 +28,19 @@ let typingOff = (io) => {
           currentUserId: socket.request.user._id,
           currentGroupId: data.groupId
         };
-        
-          //emit notification
+
+        //emit notification
         if (clients[data.groupId]) {
           emitNotifyToArray(clients, data.groupId, io, "response-user-is-not-typing", response);
         }
       }
 
-      if(data.contactId) {
+      if (data.contactId) {
         let response = {
           currentUserId: socket.request.user._id
         };
 
-          //emit notification
+        //emit notification
         if (clients[data.contactId]) {
           emitNotifyToArray(clients, data.contactId, io, "response-user-is-not-typing", response);
         }
