@@ -20,6 +20,7 @@ require('dotenv').config();
 //Initiate application
 let app = express();
 
+//Set max connection event listener
 events.EventEmitter.defaultMaxListeners = configApp.app.max_event_listener;
 
 //Init server with socket.io & express app
