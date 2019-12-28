@@ -1,4 +1,4 @@
-import {pushSocketIdToArray, removeSocketIdFromArray, emitNotifyToArray} from "./../../helpers/socketHelper";
+import { pushSocketIdToArray, removeSocketIdFromArray, emitNotifyToArray } from "./../../helpers/socketHelper";
 /**
  * 
  * @param {*} io from socket.io lb 
@@ -6,18 +6,27 @@ import {pushSocketIdToArray, removeSocketIdFromArray, emitNotifyToArray} from ".
 let chatVideo = (io) => {
   let clients = {};
   io.on("connection", (socket) => {
-    
+
     //push socketid to array
     clients = pushSocketIdToArray(clients, socket.request.user._id, socket.id);
     socket.request.user.chatGroupIds.forEach(group => {
-      clients = pushSocketIdToArray(clients, group._id,socket.id);
+      clients = pushSocketIdToArray(clients, group._id, socket.id);
+    });
+
+    //When has new group chat 
+    socket.on("new-group-created", (data) => {
+      clients = pushSocketIdToArray(clients, data.groupChat._id, socket.id);
+    });
+
+    socket.on("member-received-group-chat", (data) => {
+      clients = pushSocketIdToArray(clients, data.groupChatId, socket.id);
     });
 
     socket.on("caller-check-listener-online-or-not", (data) => {
-      if(clients[data.listenerId]){
+      if (clients[data.listenerId]) {
         //online
         let response = {
-          callerId:  socket.request.user._id,
+          callerId: socket.request.user._id,
           listenerId: data.listenerId,
           callerName: data.callerName
         };
@@ -32,10 +41,10 @@ let chatVideo = (io) => {
 
     socket.on("listener-emit-peer-id-to-server", (data) => {
       let response = {
-        callerId:  data.callerId,
+        callerId: data.callerId,
         listenerId: data.listenerId,
         callerName: data.callerName,
-        listenerName: data.listenerName, 
+        listenerName: data.listenerName,
         listenerPeerId: data.listenerPeerId
       };
 
@@ -46,10 +55,10 @@ let chatVideo = (io) => {
 
     socket.on("caller-request-call-to-server", (data) => {
       let response = {
-        callerId:  data.callerId,
+        callerId: data.callerId,
         listenerId: data.listenerId,
         callerName: data.callerName,
-        listenerName: data.listenerName, 
+        listenerName: data.listenerName,
         listenerPeerId: data.listenerPeerId
       };
 
@@ -60,10 +69,10 @@ let chatVideo = (io) => {
 
     socket.on("caller-cancel-request-call-to-server", (data) => {
       let response = {
-        callerId:  data.callerId,
+        callerId: data.callerId,
         listenerId: data.listenerId,
         callerName: data.callerName,
-        listenerName: data.listenerName, 
+        listenerName: data.listenerName,
         listenerPeerId: data.listenerPeerId
       };
 
@@ -74,10 +83,10 @@ let chatVideo = (io) => {
 
     socket.on("listener-reject-request-call-to-server", (data) => {
       let response = {
-        callerId:  data.callerId,
+        callerId: data.callerId,
         listenerId: data.listenerId,
         callerName: data.callerName,
-        listenerName: data.listenerName, 
+        listenerName: data.listenerName,
         listenerPeerId: data.listenerPeerId
       };
 
@@ -88,10 +97,10 @@ let chatVideo = (io) => {
 
     socket.on("listener-accept-request-call-to-server", (data) => {
       let response = {
-        callerId:  data.callerId,
+        callerId: data.callerId,
         listenerId: data.listenerId,
         callerName: data.callerName,
-        listenerName: data.listenerName, 
+        listenerName: data.listenerName,
         listenerPeerId: data.listenerPeerId
       };
 
