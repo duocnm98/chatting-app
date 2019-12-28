@@ -59,6 +59,8 @@ router.delete("/contact/remove-request-contact-received", auth.checkLoggedIn, co
 router.delete("/contact/remove-contact", auth.checkLoggedIn, contact.removeContact);
 router.put("/contact/approve-request-contact-received", auth.checkLoggedIn, contact.approveRequestContactReceived);
 
+router.get("/contact/search-friends/:keyword", auth.checkLoggedIn, contactValid.searchFriends, contact.searchFriends);
+
 router.get("/contacts/read-more-contacts" , auth.checkLoggedIn , contact.readMoreContacts);
 router.get("/contacts/read-more-contacts-sent" , auth.checkLoggedIn , contact.readMoreContactsSent);
 router.get("/contacts/read-more-contacts-received" , auth.checkLoggedIn , contact.readMoreContactsReceived);

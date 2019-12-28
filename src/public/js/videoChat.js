@@ -33,9 +33,6 @@ $(document).ready(function (){
   });
 
   let iceServerList = $("#ice-server-list").val();
-  console.log(JSON.parse(iceServerList));
-  console.log(typeof JSON.parse(iceServerList));
-
 
   //PeerJS
   let getPeerId = "";
